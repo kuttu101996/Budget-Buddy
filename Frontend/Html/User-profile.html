@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../Styles/User-profile.css" />
+    <link rel="stylesheet" href="../Styles/User-account.css" />
+    <link rel="stylesheet" href="../Styles/income.css" />
+    <link rel="stylesheet" href="../Styles/expense.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../Styles/User-history.css" />
+    <link rel="stylesheet" href="../Styles/User-edit-modal.css" />
+    <link rel="stylesheet" href="../Styles/User-dashboard.css" />
+    <script
+      src="https://kit.fontawesome.com/5cb8a0be4f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+    "></script>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <section class="left-options-section">
+          <div class="app-logo">
+            <div class="app-logo-image">
+              <a href="Dashboard.html"><img src="../images/bblogo2-removebg-preview.png" alt="Profile" /></a>
+            </div>
+            <div class="app-name">
+              <h3>Budget Buddy</h3>
+            </div>
+          </div>
+
+          <div class="user-options">
+            <ul>
+              <li onclick="accountOption(event)">
+                <img src="../images/user.png" alt="" /><a href="#">Account</a>
+              </li>
+              <li onclick="incomeOption(event)">
+                <img src="../images/income.png" alt="" /><a href="#">Income</a>
+              </li>
+              <li onclick="expenseOption(event)">
+                <img src="../images/expenses.png" alt="" /><a href="#"
+                  >Expenses</a
+                >
+              </li>
+              <li onclick="budgetOption(event)">
+                <img src="../images/budgeting.png" alt="" /><a href="#"
+                  >Budget</a
+                >
+              </li>
+              <li onclick="historyOption(event)">
+                <img src="../images/history.png" alt="" /><a href="#"
+                  >History</a
+                >
+              </li>
+              <li onclick="logoutOption(event)">
+                <img src="../images/logout.png" alt="" /><a href="#">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="right-section-display">
+          <div class="fixed-div">
+            <div>
+              <h3 id="Page-name-heading">Page Name</h3>
+            </div>
+            <div>
+              <h1>Grow Your Money With Budget Buddy</h1>
+            </div>
+            <div class="user-img-and-name">
+              <img src="../images/user.png" alt="" />
+              <h4 id="fixed-div-username">User Name</h4>
+            </div>
+          </div>
+
+          <div class="various-display-div">
+            <!-- on load show -->
+            <!-- <div id="container_full">
+              <div class="container">
+                <span>B</span>
+                <span>u</span>
+                <span>d</span>
+                <span>g</span>
+                <span>e</span>
+                <span>t </span>
+                <span>B</span>
+                <span>u</span>
+                <span>d</span>
+                <span>d</span>
+                <span>y</span>
+              </div>
+            </div> -->
+
+            <div id="container_full">
+              <div class="container info_container">
+                 <div>
+                  <img src="https://cdn.quotesgram.com/img/39/99/1953200464-QuotesCover-pic75.png" alt="">
+                 </div>
+                 <div>
+                  <img src="https://www.projectmanager.com/wp-content/uploads/2018/10/Planning_Franklin.jpg" alt="">
+                 </div>
+                 <div>
+                  <img src="https://www.projectmanager.com/wp-content/uploads/2018/03/quotes_5-600x600.png" alt="">
+                 </div>
+                 <div>
+                  <img src="https://www.moneyforthemamas.com/wp-content/uploads/2021/01/budgeting-quote-2.jpg" alt="">
+                 </div>
+                 <div>
+                  <img src="https://cdn.quotesgram.com/img/42/17/1856960797-541015c19a2409223b6dc69f258987bb.jpg" alt="">
+                 </div>
+                 <div>
+                  <img src="https://www.projectmanager.com/wp-content/uploads/2018/05/winston-churchill-planning-quote-600x600.jpg" alt="">
+                 </div>
+              </div>
+            </div>
+            <!-- loader -->
+            <div id="loading-container">
+              <div class="loader"></div>
+            </div>
+            <!----------------- User Account Section Start-------------- -->
+
+            <div class="profile_full">
+              <div class="profile-container">
+                <div class="left-profile-section">
+                  <div class="profile-photo-and-info-div">
+                    <div>
+                      <img
+                        src="../images/user.png"
+                        alt=""
+                        id="user-profile-photo"
+                      />
+                      <h3 id="user-display-name"></h3>
+                    </div>
+                    <div>
+                      <div>
+                        <button id="user_edit_btn" onclick="editbtnFun()">
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-media-links-div">
+                    <div>
+                      <i class="fa-brands fa-facebook"></i>
+                      <a href="">angel@123</a>
+                    </div>
+                    <div>
+                      <i class="fa-brands fa-instagram"></i>
+                      <a href="">@sweet-angel</a>
+                    </div>
+                    <div>
+                      <i class="fa-solid fa-globe"></i>
+                      <a href="">google.com</a>
+                    </div>
+                    <div>
+                      <i class="fa-brands fa-twitter"></i>
+                      <a href="">@angeltweet</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="right-profile-section">
+                  <div class="user-details-div">
+                    <div>
+                      <h4>First Name</h4>
+                      <h4 id="user-dispaly-firstname"></h4>
+                    </div>
+                    <div>
+                      <h4>Last Name</h4>
+                      <h4 id="user-dispaly-lastname"></h4>
+                    </div>
+                    <div>
+                      <h4>Email</h4>
+                      <h4 id="user-dispaly-email"></h4>
+                    </div>
+                    <div>
+                      <h4>Mobile Number</h4>
+                      <h4 id="user-dispaly-mobile">Mobile</h4>
+                    </div>
+                    <div>
+                      <h4>Adresss</h4>
+                      <h4 id="user-display-address2">Adresss</h4>
+                    </div>
+                  </div>
+
+                  <div class="extra">
+                    <div>
+                      <div>
+                        <img src="../images/vip-card.png" alt="VIP-PASS" />
+                        <h2>VIP PASS BENEFITS</h2>
+                      </div>
+                      <p>
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <strong>10% Off On All Products</strong>
+                      </p>
+                      <p>
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <strong> Avail All Premium Features</strong>
+                      </p>
+                      <p>
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <strong>Get Legal Expert Advice</strong>
+                      </p>
+                      <p>
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <strong>24/7 Support</strong>
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        "In this world, nothing can be said to be certain except
+                        death and taxes. Money is only a tool. It
+                        will take you wherever you wish, but it will not replace
+                        you as the driver.The way to become rich
+                        is to put all your eggs in one basket and then watch
+                        that basket.A penny saved is a
+                        penny earned." 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="popup" id="edit_form_popup_div">
+                <i
+                  class="fa-sharp fa-solid fa-arrow-left close_popup_arrow"
+                  onclick="dontedit(event)"
+                ></i>
+                <form action="" onsubmit="editProfilefun(event)" id="edit-form">
+                  <input
+                    type="text"
+                    name="fname"
+                    id="fname"
+                    placeholder="First name"
+                  />
+                  <input
+                    type="text"
+                    name="lname"
+                    id="lname"
+                    placeholder="Last name"
+                  />
+                  <input
+                    type="text"
+                    name="mobile"
+                    id="mobile"
+                    placeholder="Mobile"
+                  />
+                  <input type="date" name="dob" placeholder="Date Of Birth" />
+                  <input
+                    type="text"
+                    name="address"
+                    id="address"
+                    placeholder="Address"
+                  />
+                  <label for="profile">Choose Profile Photo</label>
+                  <input
+                    type="file"
+                    name="profile"
+                    onchange="fileConvertor(event)"
+                  />
+                  <button type="submit">Save</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- ----------------- User Acount Section Ends ------------------  -->
+
+            <!-- ----------------- Income Section Start ---------------- -->
+
+            <div class="income_full">
+              <div id="income_container">
+                <div class="income_top">
+                  <div class="inside_top_1">
+                    <img src="../images/income.png" alt="" />
+                  </div>
+                  <div class="inside_top_2">
+                    <h1>Total Income</h1>
+                    <h1 id="total_amount"></h1>
+                  </div>
+                </div>
+                <div class="income_mid">
+                  <div>
+                    <button id="add_income_btn">Add Income +</button>
+                  </div>
+                  <div class="filtering">
+                    <div>
+                      <label>From</label>
+                      <input id="form_date" type="date" />
+                    </div>
+                    <div>
+                      <label>To</label>
+                      <input id="to_date" type="date" />
+                    </div>
+                    <div>
+                      <button id="income_search_btn">Search</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="income_bottom">
+                  <!-- Fetching Data will be append here -->
+
+                  <!-- <div class="every_incomes_main">
+                    <div class="every_incomes_card">
+                      <div class="every_income_card_inner">
+                        <h4>Salary</h4>
+                        <p>Date - 23/4/2023</p>
+                        <h4 class="income_amount">+ 90000<span>/-</span></h4>
+                      </div>
+                      <div class="down_arrow" onclick="extra_show(event)">
+                        <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        <p>more</p>
+                      </div>
+                    </div>
+
+                    <div class="click_show">
+                      <div class="income_card_buttons">
+                        <button class="income_edit">Edit</button>
+                        <button class="income_delete">Delete</button>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="popup" id="add_income_form">
+                <i
+                  class="fa-sharp fa-solid fa-arrow-left close_popup_arrow"
+                  onclick="dontedit(event)"
+                ></i>
+                <form id="income_form">
+                  <label for="">Title</label>
+                  <input
+                    id="input_income_name"
+                    name="key"
+                    type="text"
+                    required
+                  />
+                  <label for="">Income Type</label>
+                  <input id="input_income_type" type="text" required />
+                  <label for="">Amount</label>
+                  <input id="input_income_amount" type="number" required />
+                  <input id="input_income_btn" type="submit" />
+                </form>
+              </div>
+            </div>
+
+            <!-- -------------- Income Section End --------------- -->
+
+            <!-- -------------- Expense Section Start --------------- -->
+
+            <div class="exp_full">
+              <div id="exp_container">
+                <div class="exp_top">
+                  <div class="inside_top_1">
+                    <img src="../images/income.png" alt="" />
+                  </div>
+                  <div class="inside_top_2">
+                    <h1>Total Income</h1>
+                    <h1 id="exp_total_amount"></h1>
+                  </div>
+                </div>
+                <div class="exp_mid">
+                  <div>
+                    <button id="add_exp_btn">Add Expense</button>
+                  </div>
+                  <div class="filtering">
+                    <div>
+                      <label>From</label>
+                      <input id="exp_form_date" type="date" />
+                    </div>
+                    <div>
+                      <label>To</label>
+                      <input id="exp_to_date" type="date" />
+                    </div>
+                    <div>
+                      <button id="exp_search_btn">Search</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="exp_bottom">
+                  <!-- Fetching Data will be append here -->
+
+                  <!-- <div class="every_exps_main">
+                    <div class="every_exps_card">
+                      <div class="every_exp_card_inner">
+                        <h4>Salary</h4>
+                        <p>Date - 23/4/2023</p>
+                        <h4 class="exp_amount">+ 90000<span>/-</span></h4>
+                      </div>
+                      <div class="down_arrow" onclick="extra_show(event)">
+                        <i class="fa-solid fa-arrow-down-short-wide"></i>
+                        <p>more</p>
+                      </div>
+                    </div>
+
+                    <div class="click_show">
+                      <div class="exp_card_buttons">
+                        <button class="exp_edit">Edit</button>
+                        <button class="exp_delete">Delete</button>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="popup" id="add_exp_form">
+                <i
+                  class="fa-sharp fa-solid fa-arrow-left close_popup_arrow"
+                  onclick="dontedit(event)"
+                ></i>
+                <form id="exp_form">
+                  <label for="">Title</label>
+                  <input id="input_exp_name" name="key" type="text" required />
+                  <label for="">exp Type</label>
+                  <input id="input_exp_type" type="text" required />
+                  <label for="">Amount</label>
+                  <input id="input_exp_amount" type="number" required />
+                  <input id="input_exp_btn" type="submit" />
+                </form>
+              </div>
+            </div>
+
+            <!-- ------------- Expense Section Ends -->
+
+            <!-- ----------------- User Dashboard Section Start ------------------  -->
+            <div class="dashboard_full">
+              <div class="dashboard">
+                <div class="dashboard-uper-div">
+                  <div class="line-graph">
+                    <div
+                      id="line-chart"
+                      style="width: 95%; height: 95%; margin: auto"
+                    ></div>
+                  </div>
+                  <div class="doughnut-graph">
+                    <canvas
+                      id="doughnut-chart"
+                      style="width: 95%; height: 95%; margin: auto"
+                    ></canvas>
+                  </div>
+                </div>
+                <div class="dashboard-lower-div">
+                  <div class="pie-graph">
+                    <div
+                      id="pie-chart"
+                      style="width: 95%; height: 95%; margin: auto"
+                    ></div>
+                  </div>
+                  <div class="bar-graph">
+                    <canvas
+                      id="bar-chart"
+                      style="width: 100%; height: 100%; margin: auto"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ----------------- User Dashboard Section Ends Here ------------------  -->
+
+            <!-- ----------------- User History Section Start ------------------  -->
+
+            <div class="history_full">
+              <div class="history-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Transaction Id</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-append-history"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ----------------- User History Section Ends ------------------  -->
+
+            <!-- ----------------- User Logout Section Start ------------------  -->
+            <div class="logout_full">
+              <div class="logout-layout">
+                <i class="fa-sharp fa-regular fa-circle-xmark"></i
+                ><button onclick="logoutfun()">Logout</button>
+              </div>
+            </div>
+            <!-- ----------------- User Logout Section Ends ------------------  -->
+
+            <!-- end -->
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="../Scripts/User-profile.js"></script>
+    <script src="../Scripts/income.js"></script>
+    <script src="../Scripts/expense.js"></script>
+  </body>
+</html>
